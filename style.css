@@ -1,0 +1,44 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #000; /* Fondo negro */
+    color: #00FF00;   /* Texto verde neón */
+    font-family: 'Fira Code', monospace;
+}
+
+#terminal {
+    width: 90%;
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 2px solid #00FF00;
+    border-radius: 5px;
+    background: #000;
+}
+
+#output p {
+    margin: 5px 0;
+}
+
+#input-line {
+    display: flex;
+}
+
+.prompt {
+    margin-right: 5px;
+}
+
+#command-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #00FF00;
+    font-family: 'Fira Code', monospace;
+    font-size: 16px;
+    outline: none;
+}
+
+#command-input::placeholder {
+    color: #00FF00;
+    opacity: 0.5;
+}
