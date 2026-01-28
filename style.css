@@ -28,7 +28,8 @@ body{
 #terminal{
   width:100%;
   max-width:900px;
-  height:min(70vh,600px);
+  min-height:300px;       /* Mínimo para verse bien */
+  max-height:90vh;        /* Máximo para no salirse de la pantalla */
   background:var(--panel);
   border:2px solid var(--border);
   box-shadow:0 0 25px var(--glow);
@@ -38,16 +39,18 @@ body{
   outline:none;
 }
 
+/* Output adaptativo */
 #output{
   flex:1;
   overflow-y:auto;
   color:var(--text);
   font-size:15px;
   word-break:break-word;
+  margin-bottom:8px;
 }
 
 #output p{margin:4px 0;}
-#input-line{display:flex;gap:8px;margin-top:8px;}
+#input-line{display:flex;gap:8px;}
 #command-input{
   flex:1;
   background:transparent;
@@ -58,7 +61,8 @@ body{
   caret-color:var(--text);
 }
 
+/* Móvil */
 @media(max-width:768px){
-  #terminal{height:85vh;padding:12px;}
+  #terminal{max-height:95vh; padding:12px;}
   #output,#command-input{font-size:14px;}
 }
