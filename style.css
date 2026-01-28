@@ -3,19 +3,21 @@
   --panel: rgba(0,0,0,.85);
   --text: #00ff88;
   --border: #00ff88;
-  --glow: rgba(0,255,136,.4);
+  --glow: rgba(0,255,136,.35);
 }
 
 * {
   box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
   margin: 0;
-  font-family: 'Fira Code', monospace;
   background: var(--bg);
-  color: var(--text);
-  height: 100vh;
+  font-family: 'Fira Code', monospace;
   overflow: hidden;
 }
 
@@ -25,9 +27,9 @@ body {
   z-index: -1;
 }
 
-/* APP CENTERING */
+/* CONTENEDOR CENTRADO REAL */
 #app {
-  height: 100vh;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -38,20 +40,21 @@ body {
 #terminal {
   width: 100%;
   max-width: 900px;
-  height: 70vh;
+  height: min(70vh, 600px);
   background: var(--panel);
   border: 2px solid var(--border);
   box-shadow: 0 0 25px var(--glow);
+  padding: 16px;
   display: flex;
   flex-direction: column;
-  padding: 16px;
-  overflow: hidden;
+  outline: none;
 }
 
 /* OUTPUT */
 #output {
   flex: 1;
   overflow-y: auto;
+  color: var(--text);
   font-size: 15px;
 }
 
@@ -76,11 +79,10 @@ body {
   caret-color: var(--text);
 }
 
-/* MOBILE */
+/* MÓVIL */
 @media (max-width: 768px) {
   #terminal {
-    height: 90vh;
-    padding: 12px;
+    height: 85vh;
   }
   #output, #command-input {
     font-size: 14px;
