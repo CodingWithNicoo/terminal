@@ -1,12 +1,10 @@
-/* =====================
-   THEMES
-===================== */
+// === THEMES ===
 const themes=[
   {bg:"#000", panel:"rgba(0,0,0,.85)", text:"#00ff88", border:"#00ff88", glow:"rgba(0,255,136,.35)"},
   {bg:"#020b16", panel:"rgba(2,11,22,.85)", text:"#00eaff", border:"#00eaff", glow:"rgba(0,234,255,.35)"},
   {bg:"#0b0216", panel:"rgba(11,2,22,.85)", text:"#c77dff", border:"#c77dff", glow:"rgba(199,125,255,.35)"}
 ];
-let themeIndex=0,nodeColor=themes[0].text;
+let themeIndex=0, nodeColor=themes[0].text;
 function applyTheme(t){
   document.documentElement.style.setProperty("--bg",t.bg);
   document.documentElement.style.setProperty("--panel",t.panel);
@@ -17,9 +15,7 @@ function applyTheme(t){
 }
 applyTheme(themes[0]);
 
-/* =====================
-   TERMINAL
-===================== */
+// === TERMINAL ===
 const terminal=document.getElementById("terminal");
 const output=document.getElementById("output");
 const input=document.getElementById("command-input");
@@ -39,11 +35,14 @@ function print(text){
   const p=document.createElement("p");
   p.innerHTML=text.replace(/\n/g,"<br>");
   output.appendChild(p);
+  // scroll automático
   output.scrollTop=output.scrollHeight;
 }
 
+// foco
 terminal.addEventListener("click",()=>input.focus());
-input.addEventListener("keydown",e=>{
+
+input.addEventListener("keydown", e=>{
   if(e.key==="Enter"){
     let cmd=input.value.trim();
     if(cmd!==""){history.push(cmd); histIndex=history.length;}
@@ -77,9 +76,7 @@ function run(cmd){
   }
 }
 
-/* =====================
-   BOOT
-===================== */
+// === BOOT ===
 const bootLines=[
   "Booting system...",
   "Loading modules...",
@@ -96,12 +93,11 @@ const bootLines=[
   } else input.focus();
 })();
 
-/* =====================
-   NODE BACKGROUND
-===================== */
+// === NODE BACKGROUND ===
 const canvas=document.getElementById("bgCanvas");
 const ctx=canvas.getContext("2d");
 canvas.width=innerWidth; canvas.height=innerHeight;
+
 const nodes=Array.from({length:80},()=>({x:Math.random()*canvas.width, y:Math.random()*canvas.height, vx:(Math.random()-.5)*.6, vy:(Math.random()-.5)*.6}));
 let mouse={x:null,y:null};
 canvas.addEventListener("mousemove",e=>{mouse.x=e.clientX; mouse.y=e.clientY;});
