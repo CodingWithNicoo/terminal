@@ -1,155 +1,143 @@
-/* ======================
-   FONDO NODOS (igual)
-====================== */
+/* =====================
+   THEMES
+===================== */
+const themes = [
+  {
+    bg:"#000",
+    panel:"rgba(0,0,0,.85)",
+    text:"#00ff88",
+    border:"#00ff88",
+    glow:"rgba(0,255,136,.4)"
+  },
+  {
+    bg:"#020b16",
+    panel:"rgba(2,11,22,.85)",
+    text:"#00eaff",
+    border:"#00eaff",
+    glow:"rgba(0,234,255,.4)"
+  },
+  {
+    bg:"#0b0216",
+    panel:"rgba(11,2,22,.85)",
+    text:"#c77dff",
+    border:"#c77dff",
+    glow:"rgba(199,125,255,.4)"
+  }
+];
+
+let themeIndex = 0;
+function applyTheme(t){
+  document.documentElement.style.setProperty("--bg", t.bg);
+  document.documentElement.style.setProperty("--panel", t.panel);
+  document.documentElement.style.setProperty("--text", t.text);
+  document.documentElement.style.setProperty("--border", t.border);
+  document.documentElement.style.setProperty("--glow", t.glow);
+  nodeColor = t.text;
+}
+
+/* =====================
+   TERMINAL CORE
+===================== */
+const output = document.getElementById("output");
+const input = document.getElementById("command-input");
+
+const commands = {
+  help: "about  skills  projects  contact  theme  clear",
+  about: "Creative frontend developer focused on interactive experiences.",
+  skills: "JS ██████████\nCSS ██████████\nReact █████████",
+  projects: "Terminal Portfolio\nData Visualizer\nMini Game",
+  contact: "email@example.com\nGitHub: github.com/username"
+};
+
+function print(text){
+  const p = document.createElement("p");
+  p.innerHTML = text.replace(/\n/g,"<br>");
+  output.appendChild(p);
+  output.scrollTop = output.scrollHeight;
+}
+
+input.addEventListener("keydown", e => {
+  if(e.key === "Enter"){
+    const cmd = input.value.trim();
+    print(`&gt; ${cmd}`);
+    run(cmd);
+    input.value = "";
+  }
+});
+
+function run(cmd){
+  if(cmd === "clear"){ output.innerHTML=""; return; }
+  if(cmd === "theme"){
+    themeIndex = (themeIndex+1)%themes.length;
+    applyTheme(themes[themeIndex]);
+    print("Theme switched ✔");
+    return;
+  }
+  if(commands[cmd]) print(commands[cmd]);
+  else print("<span style='color:red'>command not found</span>");
+}
+
+/* =====================
+   BOOT
+===================== */
+const boot = [
+  "Booting system...",
+  "Loading modules...",
+  "Initializing UI...",
+  "Ready.",
+  "",
+  "Welcome.",
+  "Type 'help'"
+];
+
+(function bootSeq(i=0){
+  if(i<boot.length){
+    print(boot[i]);
+    setTimeout(()=>bootSeq(i+1),300);
+  }
+})();
+
+/* =====================
+   NODE BACKGROUND
+===================== */
 const canvas = document.getElementById("bgCanvas");
 const ctx = canvas.getContext("2d");
 canvas.width = innerWidth;
 canvas.height = innerHeight;
 
-let themeColor = "#00ff00";
+let nodeColor = themes[0].text;
+const nodes = Array.from({length:80},()=>({
+  x:Math.random()*canvas.width,
+  y:Math.random()*canvas.height,
+  vx:(Math.random()-.5)*.6,
+  vy:(Math.random()-.5)*.6
+}));
 
-const nodes = [];
-for (let i = 0; i < 90; i++) {
-  nodes.push({
-    x: Math.random()*canvas.width,
-    y: Math.random()*canvas.height,
-    vx:(Math.random()-.5)*.6,
-    vy:(Math.random()-.5)*.6
-  });
-}
-
-let mouse={x:null,y:null};
-canvas.onmousemove=e=>{mouse.x=e.clientX;mouse.y=e.clientY};
-
-function bg(){
+function animate(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
   nodes.forEach((a,i)=>{
     nodes.forEach((b,j)=>{
       if(i!==j){
         const d=Math.hypot(a.x-b.x,a.y-b.y);
         if(d<140){
-          ctx.strokeStyle=`rgba(0,255,0,${1-d/140})`.replace("0,255,0",themeColor.slice(1));
-          ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
+          ctx.strokeStyle=`${nodeColor}55`;
+          ctx.beginPath();
+          ctx.moveTo(a.x,a.y);
+          ctx.lineTo(b.x,b.y);
+          ctx.stroke();
         }
       }
     });
-    if(mouse.x){
-      const d=Math.hypot(a.x-mouse.x,a.y-mouse.y);
-      if(d<120){a.vx+=(a.x-mouse.x)*.0004;a.vy+=(a.y-mouse.y)*.0004;}
-    }
-    a.x+=a.vx;a.y+=a.vy;
+    a.x+=a.vx; a.y+=a.vy;
     if(a.x<0||a.x>canvas.width)a.vx*=-1;
     if(a.y<0||a.y>canvas.height)a.vy*=-1;
-    ctx.fillStyle=themeColor;
-    ctx.beginPath();ctx.arc(a.x,a.y,2,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle=nodeColor;
+    ctx.beginPath();
+    ctx.arc(a.x,a.y,2,0,Math.PI*2);
+    ctx.fill();
   });
-  requestAnimationFrame(bg);
+  requestAnimationFrame(animate);
 }
-bg();
+animate();
 
 onresize=()=>{canvas.width=innerWidth;canvas.height=innerHeight};
-
-/* ======================
-   TERMINAL CORE
-====================== */
-const output=document.getElementById("output");
-const input=document.getElementById("command-input");
-const inputLine=document.getElementById("input-line");
-
-const commands={
-  help:`about  skills  projects  contact  theme  clear`,
-  about:`Web developer focused on creative interfaces and clean code.`,
-  skills:`JS ██████████ 90%\nReact █████████ 85%\nCSS ██████████ 95%`,
-  projects:`▶ Terminal Portfolio\n▶ Data Visualizer\n▶ Mini Game`,
-  contact:`email@example.com\nGitHub: github.com/username`,
-};
-
-const history=[];
-let historyIndex=-1;
-
-function line(text,color=themeColor){
-  const p=document.createElement("p");
-  p.style.color=color;
-  p.innerHTML=text.replace(/\n/g,"<br>");
-  output.appendChild(p);
-}
-
-function type(text,i=0,p=null){
-  if(!p){p=document.createElement("p");output.appendChild(p);}
-  if(i<text.length){
-    p.innerHTML+=text[i]==="\n"?"<br>":text[i];
-    setTimeout(()=>type(text,i+1,p),15);
-  }
-}
-
-input.onkeydown=e=>{
-  if(e.key==="Enter"){
-    const cmd=input.value.trim();
-    history.push(cmd); historyIndex=history.length;
-    line(`> ${cmd}`);
-    run(cmd);
-    input.value="";
-  }
-  if(e.key==="ArrowUp"){
-    historyIndex=Math.max(0,historyIndex-1);
-    input.value=history[historyIndex]||"";
-  }
-  if(e.key==="ArrowDown"){
-    historyIndex=Math.min(history.length,historyIndex+1);
-    input.value=history[historyIndex]||"";
-  }
-  if(e.key==="Tab"){
-    e.preventDefault();
-    const match=Object.keys(commands).find(c=>c.startsWith(input.value));
-    if(match) input.value=match;
-  }
-};
-
-function run(cmd){
-  if(cmd==="clear"){output.innerHTML="";return;}
-  if(cmd==="theme"){switchTheme();return;}
-  if(cmd==="sudo make me hire"){
-    type("Access granted.\nYou should definitely hire this developer 😎");
-    return;
-  }
-  if(commands[cmd]) type(commands[cmd]);
-  else line("command not found","red");
-}
-
-/* ======================
-   THEMES
-====================== */
-function switchTheme(){
-  const t=[
-    "#00ff00","#00eaff","#ffffff"
-  ][Math.floor(Math.random()*3)];
-  document.documentElement.style.setProperty("--main",t);
-  themeColor=t;
-  line("Theme switched ✔");
-}
-
-/* ======================
-   BOOT SEQUENCE
-====================== */
-const bootLines=[
-  "Initializing system...",
-  "Loading kernel modules...",
-  "Mounting file system...",
-  "Starting network services...",
-  "Boot sequence complete.",
-  "",
-  "Welcome to Tu Nombre OS",
-  "Type 'help' to get started"
-];
-
-function boot(i=0){
-  if(i<bootLines.length){
-    type(bootLines[i]+"\n");
-    setTimeout(()=>boot(i+1),400);
-  }else{
-    inputLine.style.display="flex";
-    input.focus();
-  }
-}
-
-boot();
