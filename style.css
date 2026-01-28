@@ -1,44 +1,88 @@
-body {
-    margin: 0;
-    padding: 0;
-    background: #000; /* Fondo negro */
-    color: #00FF00;   /* Texto verde neón */
-    font-family: 'Fira Code', monospace;
+:root {
+  --bg: #000;
+  --panel: rgba(0,0,0,.85);
+  --text: #00ff88;
+  --border: #00ff88;
+  --glow: rgba(0,255,136,.4);
 }
 
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Fira Code', monospace;
+  background: var(--bg);
+  color: var(--text);
+  height: 100vh;
+  overflow: hidden;
+}
+
+#bgCanvas {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+}
+
+/* APP CENTERING */
+#app {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+/* TERMINAL */
 #terminal {
-    width: 90%;
-    max-width: 800px;
-    margin: 50px auto;
-    padding: 20px;
-    border: 2px solid #00FF00;
-    border-radius: 5px;
-    background: #000;
+  width: 100%;
+  max-width: 900px;
+  height: 70vh;
+  background: var(--panel);
+  border: 2px solid var(--border);
+  box-shadow: 0 0 25px var(--glow);
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  overflow: hidden;
+}
+
+/* OUTPUT */
+#output {
+  flex: 1;
+  overflow-y: auto;
+  font-size: 15px;
 }
 
 #output p {
-    margin: 5px 0;
+  margin: 4px 0;
 }
 
+/* INPUT */
 #input-line {
-    display: flex;
-}
-
-.prompt {
-    margin-right: 5px;
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
 }
 
 #command-input {
-    flex: 1;
-    background: transparent;
-    border: none;
-    color: #00FF00;
-    font-family: 'Fira Code', monospace;
-    font-size: 16px;
-    outline: none;
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-size: 15px;
+  outline: none;
+  caret-color: var(--text);
 }
 
-#command-input::placeholder {
-    color: #00FF00;
-    opacity: 0.5;
+/* MOBILE */
+@media (max-width: 768px) {
+  #terminal {
+    height: 90vh;
+    padding: 12px;
+  }
+  #output, #command-input {
+    font-size: 14px;
+  }
 }
