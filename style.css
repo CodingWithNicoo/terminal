@@ -6,85 +6,59 @@
   --glow: rgba(0,255,136,.35);
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
-html, body {
-  height: 100%;
-}
+html, body { height: 100%; margin:0; }
 
 body {
-  margin: 0;
   background: var(--bg);
   font-family: 'Fira Code', monospace;
   overflow: hidden;
 }
 
-#bgCanvas {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-}
+#bgCanvas { position: fixed; inset:0; z-index:-1; }
 
-/* CONTENEDOR CENTRADO REAL */
+/* Contenedor centrado */
 #app {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:16px;
 }
 
-/* TERMINAL */
+/* Terminal */
 #terminal {
-  width: 100%;
-  max-width: 900px;
-  height: min(70vh, 600px);
+  width:100%;
+  max-width:900px;
+  height:min(70vh,600px);
   background: var(--panel);
-  border: 2px solid var(--border);
-  box-shadow: 0 0 25px var(--glow);
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  outline: none;
+  border:2px solid var(--border);
+  box-shadow:0 0 25px var(--glow);
+  padding:16px;
+  display:flex;
+  flex-direction:column;
+  outline:none;
 }
 
-/* OUTPUT */
-#output {
-  flex: 1;
-  overflow-y: auto;
-  color: var(--text);
-  font-size: 15px;
-}
+/* Output */
+#output { flex:1; overflow-y:auto; color:var(--text); font-size:15px; }
+#output p { margin:4px 0; }
 
-#output p {
-  margin: 4px 0;
-}
-
-/* INPUT */
-#input-line {
-  display: flex;
-  gap: 8px;
-  margin-top: 8px;
-}
-
+/* Input */
+#input-line { display:flex; gap:8px; margin-top:8px; }
 #command-input {
-  flex: 1;
-  background: transparent;
-  border: none;
-  color: var(--text);
-  font-size: 15px;
-  outline: none;
-  caret-color: var(--text);
+  flex:1;
+  background:transparent;
+  border:none;
+  color:var(--text);
+  font-size:15px;
+  outline:none;
+  caret-color:var(--text);
 }
 
-/* MÓVIL */
-@media (max-width: 768px) {
-  #terminal {
-    height: 85vh;
-  }
-  #output, #command-input {
-    font-size: 14px;
-  }
+/* Móvil */
+@media (max-width:768px){
+  #terminal{ height:85vh; padding:12px; }
+  #output,#command-input{ font-size:14px; }
 }
