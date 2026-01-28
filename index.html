@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Terminal Portfolio - Tu Nombre</title>
-  <meta name="description" content="Interactive terminal portfolio with boot sequence and hacker-style UI">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Terminal Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -12,12 +11,13 @@
 
 <canvas id="bgCanvas"></canvas>
 
-<div id="terminal">
-  <div id="output"></div>
-
-  <div id="input-line" style="display:none;">
-    <span class="prompt">&gt;</span>
-    <input id="command-input" autocomplete="off" />
+<div id="app">
+  <div id="terminal" tabindex="0">
+    <div id="output"></div>
+    <div id="input-line">
+      <span class="prompt">&gt;</span>
+      <input id="command-input" autocomplete="off" />
+    </div>
   </div>
 </div>
 
