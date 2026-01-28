@@ -1,25 +1,23 @@
 :root {
-  --bg: #000;
-  --panel: rgba(0,0,0,.85);
-  --text: #00ff88;
-  --border: #00ff88;
-  --glow: rgba(0,255,136,.35);
+  --bg:#000;
+  --panel:rgba(0,0,0,.85);
+  --text:#00ff88;
+  --border:#00ff88;
+  --glow:rgba(0,255,136,.35);
 }
 
-* { box-sizing: border-box; }
+*{box-sizing:border-box;}
+html,body{height:100%;margin:0;}
 
-html, body { height: 100%; margin:0; }
-
-body {
-  background: var(--bg);
-  font-family: 'Fira Code', monospace;
-  overflow: hidden;
+body{
+  background:var(--bg);
+  font-family:'Fira Code',monospace;
+  overflow:hidden;
 }
 
-#bgCanvas { position: fixed; inset:0; z-index:-1; }
+#bgCanvas{position:fixed;inset:0;z-index:-1;}
 
-/* Contenedor centrado */
-#app {
+#app{
   height:100%;
   display:flex;
   align-items:center;
@@ -27,12 +25,11 @@ body {
   padding:16px;
 }
 
-/* Terminal */
-#terminal {
+#terminal{
   width:100%;
   max-width:900px;
   height:min(70vh,600px);
-  background: var(--panel);
+  background:var(--panel);
   border:2px solid var(--border);
   box-shadow:0 0 25px var(--glow);
   padding:16px;
@@ -41,13 +38,17 @@ body {
   outline:none;
 }
 
-/* Output */
-#output { flex:1; overflow-y:auto; color:var(--text); font-size:15px; }
-#output p { margin:4px 0; }
+#output{
+  flex:1;
+  overflow-y:auto;
+  color:var(--text);
+  font-size:15px;
+  word-break:break-word;
+}
 
-/* Input */
-#input-line { display:flex; gap:8px; margin-top:8px; }
-#command-input {
+#output p{margin:4px 0;}
+#input-line{display:flex;gap:8px;margin-top:8px;}
+#command-input{
   flex:1;
   background:transparent;
   border:none;
@@ -57,8 +58,7 @@ body {
   caret-color:var(--text);
 }
 
-/* Móvil */
-@media (max-width:768px){
-  #terminal{ height:85vh; padding:12px; }
-  #output,#command-input{ font-size:14px; }
+@media(max-width:768px){
+  #terminal{height:85vh;padding:12px;}
+  #output,#command-input{font-size:14px;}
 }
