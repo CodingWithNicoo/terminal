@@ -1,68 +1,132 @@
 :root {
-  --bg:#000;
-  --panel:rgba(0,0,0,.85);
-  --text:#00ff88;
-  --border:#00ff88;
-  --glow:rgba(0,255,136,.35);
+  --bg: #000;
+  --panel: rgba(0,0,0,.85);
+  --text: #00ff88;
+  --border: #00ff88;
+  --glow: rgba(0,255,136,.35);
 }
 
-*{box-sizing:border-box;}
-html,body{height:100%;margin:0;}
-
-body{
-  background:var(--bg);
-  font-family:'Fira Code',monospace;
-  overflow:hidden;
+* {
+  box-sizing: border-box;
 }
 
-#bgCanvas{position:fixed;inset:0;z-index:-1;}
-
-#app{
-  height:100%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:16px;
+html, body {
+  height: 100%;
+  margin: 0;
 }
 
-#terminal{
-  width:100%;
-  max-width:900px;
-  min-height:300px;       /* Mínimo para verse bien */
-  max-height:90vh;        /* Máximo para no salirse de la pantalla */
-  background:var(--panel);
-  border:2px solid var(--border);
-  box-shadow:0 0 25px var(--glow);
-  padding:16px;
-  display:flex;
-  flex-direction:column;
-  outline:none;
+body {
+  background: var(--bg);
+  font-family: 'Fira Code', monospace;
+  overflow: hidden;
 }
 
-/* Output adaptativo */
-#output{
-  flex:1;
-  overflow-y:auto;
-  color:var(--text);
-  font-size:15px;
-  word-break:break-word;
-  margin-bottom:8px;
+/* Fondo */
+#bgCanvas {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
 }
 
-#output p{margin:4px 0;}
-#input-line{display:flex;gap:8px;}
-#command-input{
-  flex:1;
-  background:transparent;
-  border:none;
-  color:var(--text);
-  font-size:15px;
-  outline:none;
-  caret-color:var(--text);
+/* Contenedor centrado */
+#app {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+/* Terminal */
+#terminal {
+  width: 100%;
+  max-width: 900px;
+  min-height: 280px;
+  max-height: 90vh;
+  background: var(--panel);
+  border: 2px solid var(--border);
+  box-shadow: 0 0 25px var(--glow);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  outline: none;
+}
+
+/* Output */
+#output {
+  flex: 1;
+  overflow-y: auto;
+  color: var(--text);
+  font-size: 15px;
+  word-break: break-word;
+}
+
+#output p {
+  margin: 4px 0;
+}
+
+/* Input */
+#input-line {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+#command-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-size: 15px;
+  outline: none;
+  caret-color: var(--text);
+}
+
+/* Botón de tema */
+#theme-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--panel);
+  color: var(--text);
+  border: 2px solid var(--border);
+  box-shadow: 0 0 12px var(--glow);
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+#theme-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 18px var(--glow);
+}
+
+#theme-btn:active {
+  transform: scale(0.95);
 }
 
 /* Móvil */
-@media(max-width:768px){
-  #terminal{max-height:95vh; padding:12px;}
-  #output,#command-input{font-size:14px;}
+@media (max-width: 768px) {
+  #terminal {
+    max-height: 95vh;
+    padding: 12px;
+  }
+
+  #output,
+  #command-input {
+    font-size: 14px;
+  }
+
+  #theme-btn {
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+  }
 }
