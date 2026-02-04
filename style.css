@@ -1,132 +1,102 @@
-:root {
-  --bg: #000;
-  --panel: rgba(0,0,0,.85);
-  --text: #00ff88;
-  --border: #00ff88;
-  --glow: rgba(0,255,136,.35);
+:root{
+  --bg:#f0f0f0;
+  --text:#111;
+  --card-bg:#fff;
+  --card-border:#ccc;
+  --accent:#4caf50;
 }
 
-* {
-  box-sizing: border-box;
+body{
+  margin:0;
+  font-family:'Fira Code',monospace;
+  background:var(--bg);
+  color:var(--text);
 }
 
-html, body {
-  height: 100%;
-  margin: 0;
+header{
+  text-align:center;
+  padding:20px 0;
+  background:var(--accent);
+  color:#fff;
 }
 
-body {
-  background: var(--bg);
-  font-family: 'Fira Code', monospace;
-  overflow: hidden;
+#cards-container{
+  max-width:900px;
+  margin:20px auto;
+  padding:0 10px;
 }
 
-/* Fondo */
-#bgCanvas {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
+.card{
+  border:2px solid var(--card-border);
+  border-radius:8px;
+  margin-bottom:15px;
+  background:var(--card-bg);
+  cursor:pointer;
+  overflow:hidden;
+  transition:all 0.3s ease;
 }
 
-/* Contenedor centrado */
-#app {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
+.card-header{
+  padding:12px 16px;
+  font-weight:bold;
+  font-size:16px;
+  background:var(--accent);
+  color:#fff;
 }
 
-/* Terminal */
-#terminal {
-  width: 100%;
-  max-width: 900px;
-  min-height: 280px;
-  max-height: 90vh;
-  background: var(--panel);
-  border: 2px solid var(--border);
-  box-shadow: 0 0 25px var(--glow);
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  outline: none;
+.card-body{
+  max-height:0;
+  padding:0 16px;
+  transition:max-height 0.4s ease, padding 0.4s ease;
+  overflow:hidden;
 }
 
-/* Output */
-#output {
-  flex: 1;
-  overflow-y: auto;
-  color: var(--text);
-  font-size: 15px;
-  word-break: break-word;
+.card.open .card-body{
+  padding:12px 16px;
+  max-height:500px; /* suficiente para mostrar contenido */
 }
 
-#output p {
-  margin: 4px 0;
+.progress-bar{
+  margin-top:10px;
 }
 
-/* Input */
-#input-line {
-  display: flex;
-  gap: 8px;
-  margin-top: 8px;
+.progress-bar .bar{
+  background:#eee;
+  border-radius:4px;
+  height:12px;
+  margin-bottom:8px;
+  overflow:hidden;
 }
 
-#command-input {
-  flex: 1;
-  background: transparent;
-  border: none;
-  color: var(--text);
-  font-size: 15px;
-  outline: none;
-  caret-color: var(--text);
+.progress-bar .bar div{
+  height:100%;
+  background:var(--accent);
 }
 
 /* Botón de tema */
-#theme-btn {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: var(--panel);
-  color: var(--text);
-  border: 2px solid var(--border);
-  box-shadow: 0 0 12px var(--glow);
-  cursor: pointer;
-  font-size: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-  transition: transform .2s ease, box-shadow .2s ease;
+#theme-btn{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:var(--card-bg);
+  color:var(--text);
+  border:2px solid var(--card-border);
+  cursor:pointer;
+  font-size:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition: transform 0.2s ease;
 }
 
-#theme-btn:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 18px var(--glow);
-}
-
-#theme-btn:active {
-  transform: scale(0.95);
+#theme-btn:hover{
+  transform:scale(1.1);
 }
 
 /* Móvil */
-@media (max-width: 768px) {
-  #terminal {
-    max-height: 95vh;
-    padding: 12px;
-  }
-
-  #output,
-  #command-input {
-    font-size: 14px;
-  }
-
-  #theme-btn {
-    width: 48px;
-    height: 48px;
-    font-size: 20px;
-  }
+@media(max-width:768px){
+  #cards-container{padding:0 8px;}
 }
