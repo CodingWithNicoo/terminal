@@ -53,11 +53,11 @@ const output = document.getElementById("output");
 const input = document.getElementById("command-input");
 
 const commands = {
-  help: "about  skills  projects  contact  clear  neofetch",
-  about: "Creative frontend developer focused on interactive experiences.",
-  skills: "JavaScript ██████████\nCSS ██████████\nReact █████████",
-  projects: "▶ Terminal Portfolio\n▶ Data Visualizer\n▶ Mini Game",
-  contact: "email@example.com\nGitHub: github.com/username"
+  help: "about  skills  projects  contact  clear",
+  about: ".",
+  skills: "",
+  projects: "",
+  contact: "nmalaguti@ies-eugeni.cat\nGitHub: github.com/codingwithnicoo"
 };
 
 let history = [];
@@ -106,15 +106,6 @@ input.addEventListener("keydown", e => {
 function run(cmd) {
   if (cmd === "clear") {
     output.innerHTML = "";
-    return;
-  }
-
-  if (cmd === "neofetch") {
-    print("<strong>Terminal Portfolio OS</strong>");
-    print("User: Tu Nombre");
-    print("Role: Frontend Developer");
-    print("Stack: JS / CSS / React");
-    print("UI: Interactive Web Terminal");
     return;
   }
 
