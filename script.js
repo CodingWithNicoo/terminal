@@ -1,9 +1,8 @@
-// Cards interactivos y animación barras
+// Cards interactivas y animación de barras
 const cards = document.querySelectorAll('.card');
 cards.forEach(card=>{
   card.addEventListener('click', ()=>{
     card.classList.toggle('open');
-    // Animar barras si hay
     const bars = card.querySelectorAll('.progress-bar div');
     bars.forEach(bar=>{
       bar.style.width = bar.dataset.width;
@@ -17,15 +16,15 @@ let darkMode=false;
 themeBtn.addEventListener('click',()=>{
   darkMode=!darkMode;
   if(darkMode){
-    document.documentElement.style.setProperty('--bg','#111');
+    document.documentElement.style.setProperty('--bg','#121417');
     document.documentElement.style.setProperty('--text','#f0f0f0');
     document.documentElement.style.setProperty('--card-bg','rgba(255,255,255,0.05)');
     document.documentElement.style.setProperty('--card-border','rgba(255,255,255,0.15)');
     document.documentElement.style.setProperty('--accent','#ff9800');
   } else{
-    document.documentElement.style.setProperty('--bg','#0b0c10');
+    document.documentElement.style.setProperty('--bg','#1b1f2b');
     document.documentElement.style.setProperty('--text','#f0f0f0');
-    document.documentElement.style.setProperty('--card-bg','rgba(255,255,255,0.1)');
+    document.documentElement.style.setProperty('--card-bg','rgba(255,255,255,0.08)');
     document.documentElement.style.setProperty('--card-border','rgba(255,255,255,0.2)');
     document.documentElement.style.setProperty('--accent','#4caf50');
   }
@@ -70,7 +69,7 @@ new Chart(ctxObj,{
   type:'doughnut',
   data:{
     labels:['Corto Plazo','Medio Plazo','Largo Plazo'],
-    datasets:[{data:[1,1,1],backgroundColor:['#4caf50','#2196f3','#ff9800'],hoverOffset:4}]
+    datasets:[{data:[1,1,1],backgroundColor:['#4caf50','#2196f3','#ff9800'],hoverOffset:6}]
   },
   options:{
     responsive:true,
