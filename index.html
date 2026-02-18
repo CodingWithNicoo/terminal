@@ -3,9 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IPOP Interactivo - Nicolás Malaguti</title>
+<title>IPOP - Nicolás Malaguti</title>
 <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Para gráficos circulares -->
 </head>
 <body>
 
@@ -54,9 +55,9 @@
       <p><strong>Áreas de mejora:</strong> Concentración</p>
       <div class="progress-bar">
         <span>Trabajo en equipo</span>
-        <div class="bar"><div style="width:80%"></div></div>
+        <div class="bar"><div data-width="80%"></div></div>
         <span>Resolución de problemas</span>
-        <div class="bar"><div style="width:70%"></div></div>
+        <div class="bar"><div data-width="70%"></div></div>
       </div>
     </div>
   </div>
@@ -64,24 +65,7 @@
   <div class="card">
     <div class="card-header">Objetivos Profesionales</div>
     <div class="card-body">
+      <canvas id="objetivosChart" width="200" height="200"></canvas>
       <p><strong>Corto plazo (1-2 años):</strong> Entrar a una corporativa media o grande (ej. PC Componentes)</p>
       <p><strong>Medio plazo (3-5 años):</strong> Conseguir un trabajo telemático</p>
-      <p><strong>Largo plazo (5+ años):</strong> Crear mi propia empresa</p>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-header">Plan de Acción</div>
-    <div class="card-body">
-      <p>Probar distintas áreas para descubrir qué me apasiona.</p>
-      <p>Seguir formándome y acceder a la universidad para especializarme más.</p>
-    </div>
-  </div>
-
-</div>
-
-<button id="theme-btn" aria-label="Cambiar tema">🎨</button>
-
-<script src="script.js"></script>
-</body>
-</html>
+      <p><strong>Largo plazo (5+ años):</str
