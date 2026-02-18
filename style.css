@@ -1,7 +1,7 @@
 :root{
-  --bg:#0b0c10;
+  --bg:#1b1f2b; /* azul grisáceo oscuro */
   --text:#f0f0f0;
-  --card-bg: rgba(255,255,255,0.1);
+  --card-bg: rgba(255,255,255,0.08);
   --card-border: rgba(255,255,255,0.2);
   --accent:#4caf50;
 }
@@ -24,11 +24,12 @@ header{text-align:center;padding:20px 0;}
   box-shadow:0 4px 30px rgba(0,0,0,0.3);
   cursor:pointer;
   overflow:hidden;
-  transition: all 0.5s ease, box-shadow 0.3s ease;
+  transition: all 0.5s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .card:hover{
-  box-shadow:0 8px 40px rgba(0,0,0,0.5);
+  box-shadow:0 10px 40px rgba(0,0,0,0.5);
+  transform: translateY(-3px);
 }
 
 .card-header{
@@ -47,7 +48,7 @@ header{text-align:center;padding:20px 0;}
 
 .card.open .card-body{
   padding:12px 20px;
-  max-height:700px;
+  max-height:800px;
 }
 
 .progress-bar{margin-top:10px;}
@@ -83,4 +84,7 @@ header{text-align:center;padding:20px 0;}
   transition: transform 0.2s ease, background 0.3s ease;
 }
 #theme-btn:hover{transform:scale(1.1);}
-@media(max-width:768px){#cards-container{padding:0 8px;}}
+
+@media(max-width:768px){
+  #cards-container{padding:0 8px;}
+}
