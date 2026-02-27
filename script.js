@@ -1,80 +1,90 @@
-// Cards interactivas y animación de barras
-const cards = document.querySelectorAll('.card');
-cards.forEach(card=>{
-  card.addEventListener('click', ()=>{
-    card.classList.toggle('open');
-    const bars = card.querySelectorAll('.progress-bar div');
-    bars.forEach(bar=>{
-      bar.style.width = bar.dataset.width;
-    });
+const root = document.documentElement;
+const themeToggle = document.getElementById('themeToggle');
+const plantLayer = document.getElementById('plantLayer');
+
+if (themeToggle) {
+  themeToggle.addEventListener('click', () => {
+    root.classList.toggle('alt');
   });
-});
+}
 
-// Tema claro/oscuro
-const themeBtn = document.getElementById('theme-btn');
-let darkMode=false;
-themeBtn.addEventListener('click',()=>{
-  darkMode=!darkMode;
-  if(darkMode){
-    document.documentElement.style.setProperty('--bg','#121417');
-    document.documentElement.style.setProperty('--text','#f0f0f0');
-    document.documentElement.style.setProperty('--card-bg','rgba(255,255,255,0.05)');
-    document.documentElement.style.setProperty('--card-border','rgba(255,255,255,0.15)');
-    document.documentElement.style.setProperty('--accent','#ff9800');
-  } else{
-    document.documentElement.style.setProperty('--bg','#1b1f2b');
-    document.documentElement.style.setProperty('--text','#f0f0f0');
-    document.documentElement.style.setProperty('--card-bg','rgba(255,255,255,0.08)');
-    document.documentElement.style.setProperty('--card-border','rgba(255,255,255,0.2)');
-    document.documentElement.style.setProperty('--accent','#4caf50');
+function createLeaves() {
+  if (!plantLayer) return;
+  plantLayer.innerHTML = '';
+  const amount = Math.min(38, Math.max(18, Math.floor(window.innerWidth / 42)));
+
+  for (let i = 0; i < amount; i += 1) {
+    const leaf = document.createElement('span');
+    leaf.className = 'leaf';
+    leaf.style.left = `${Math.random() * 100}%`;
+    leaf.style.setProperty('--size', `${10 + Math.random() * 28}px`);
+    leaf.style.setProperty('--speed', `${3.2 + Math.random() * 2.4}s`);
+    leaf.style.setProperty('--rise', `${18 + Math.random() * 15}s`);
+    leaf.style.setProperty('--delay', `${-Math.random() * 18}s`);
+    plantLayer.appendChild(leaf);
   }
+}
+
+const canvas = document.getElementById('forestMist');
+const ctx = canvas.getContext('2d');
+const particles = [];
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+function createParticles() {
+  particles.length = 0;
+  const amount = Math.min(135, Math.floor(window.innerWidth / 10));
+
+  for (let i = 0; i < amount; i += 1) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 2.6 + 0.6,
+      vx: (Math.random() - 0.5) * 0.18,
+      vy: Math.random() * 0.34 + 0.06,
+      alpha: 0.12 + Math.random() * 0.33,
+    });
+  }
+}
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  for (const p of particles) {
+    p.x += p.vx;
+    p.y += p.vy;
+
+    if (p.y > canvas.height + 16) {
+      p.y = -16;
+      p.x = Math.random() * canvas.width;
+    }
+
+    if (p.x < -16) p.x = canvas.width + 16;
+    if (p.x > canvas.width + 16) p.x = -16;
+
+    const glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 7);
+    glow.addColorStop(0, `rgba(107, 255, 157, ${p.alpha})`);
+    glow.addColorStop(1, 'rgba(107, 255, 157, 0)');
+
+    ctx.fillStyle = glow;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r * 6, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  requestAnimationFrame(draw);
+}
+
+window.addEventListener('resize', () => {
+  resize();
+  createParticles();
+  createLeaves();
 });
 
-// Fondo animado nodos
-const canvas=document.getElementById('bgCanvas');
-const ctx=canvas.getContext('2d');
-let nodes=[],mouse={x:null,y:null};
-function resize(){canvas.width=innerWidth;canvas.height=innerHeight;}
 resize();
-window.addEventListener('resize',resize);
-canvas.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY;});
-canvas.addEventListener('mouseleave',()=>{mouse.x=null;mouse.y=null;});
-
-for(let i=0;i<80;i++){
-  nodes.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:(Math.random()-0.5)*0.6,vy:(Math.random()-0.5)*0.6});
-}
-
-function animate(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  for(let i=0;i<nodes.length;i++){
-    const a=nodes[i];a.x+=a.vx;a.y+=a.vy;if(a.x<0||a.x>canvas.width)a.vx*=-1;if(a.y<0||a.y>canvas.height)a.vy*=-1;
-    ctx.fillStyle="rgba(255,255,255,0.4)";
-    ctx.beginPath();ctx.arc(a.x,a.y,3,0,Math.PI*2);ctx.fill();
-    for(let j=i+1;j<nodes.length;j++){
-      const b=nodes[j];const d=Math.hypot(a.x-b.x,a.y-b.y);
-      if(d<150){ctx.strokeStyle=`rgba(255,255,255,${(1-d/150)*0.2})`;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}
-    }
-    if(mouse.x!==null){
-      const dMouse=Math.hypot(a.x-mouse.x,a.y-mouse.y);
-      if(dMouse<120){ctx.strokeStyle=`rgba(255,255,255,${(1-dMouse/120)*0.2})`;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(mouse.x,mouse.y);ctx.stroke();}
-    }
-  }
-  requestAnimationFrame(animate);
-}
-animate();
-
-// Gráfico circular objetivos animado
-const ctxObj=document.getElementById('objetivosChart').getContext('2d');
-new Chart(ctxObj,{
-  type:'doughnut',
-  data:{
-    labels:['Corto Plazo','Medio Plazo','Largo Plazo'],
-    datasets:[{data:[1,1,1],backgroundColor:['#4caf50','#2196f3','#ff9800'],hoverOffset:6}]
-  },
-  options:{
-    responsive:true,
-    plugins:{legend:{position:'bottom'}},
-    cutout:'60%',
-    animation:{animateScale:true,animateRotate:true}
-  }
-});
+createParticles();
+createLeaves();
+draw();
