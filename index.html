@@ -1,89 +1,75 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IPOP Interactivo - Nicolás Malaguti</title>
-<link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IPOP | Bosque Digital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <canvas id="forestMist" aria-hidden="true"></canvas>
 
-<canvas id="bgCanvas"></canvas>
+  <main class="layout">
+    <header class="hero glass">
+      <p class="chip">IPOP • Perfil Profesional</p>
+      <h1>Portal IPOP con estética de bosque y liquid glass</h1>
+      <p>
+        Una presentación visual con tonos oscuros y verdosos para transmitir calma,
+        enfoque y crecimiento profesional.
+      </p>
+    </header>
 
-<header>
-  <h1>Nicolás Miguel Malaguti Frias</h1>
-  <p>1er año de Grado Medio - IES Eugeni d’Ors</p>
-</header>
+    <section class="grid" aria-label="Resumen IPOP">
+      <article class="card glass">
+        <h2>Datos Personales</h2>
+        <ul>
+          <li><strong>Nombre:</strong> Nicolás Miguel Malaguti Frias</li>
+          <li><strong>Edad:</strong> 16 años</li>
+          <li><strong>Formación:</strong> 1º de Grado Medio</li>
+          <li><strong>Centro:</strong> IES Eugeni d'Ors</li>
+        </ul>
+      </article>
 
-<div id="cards-container">
+      <article class="card glass">
+        <h2>Perfil Profesional</h2>
+        <p>
+          Me adapto rápido, trabajo bien en equipo y mantengo constancia para alcanzar objetivos.
+        </p>
+        <div class="tags">
+          <span>Resiliencia</span>
+          <span>Comunicación</span>
+          <span>Aprendizaje continuo</span>
+        </div>
+      </article>
 
-  <div class="card">
-    <div class="card-header">Datos Personales</div>
-    <div class="card-body">
-      <p><strong>Nombre:</strong> Nicolás Miguel Malaguti Frias</p>
-      <p><strong>Edad:</strong> 16 años</p>
-      <p><strong>Formación:</strong> 1er año de Grado Medio, IES Eugeni d’Ors</p>
-      <p><strong>Contacto:</strong> nmalaguti@ies-eugeni.cat</p>
-    </div>
-  </div>
+      <article class="card glass">
+        <h2>Intereses</h2>
+        <p>Aplicaciones web, ciberseguridad, redes y tecnología en general.</p>
+        <div class="meter">
+          <label for="focus">Enfoque actual</label>
+          <div class="bar"><div id="focus" style="--value: 78%"></div></div>
+        </div>
+      </article>
 
-  <div class="card">
-    <div class="card-header">Perfil Profesional</div>
-    <div class="card-body">
-      <p>Me comprometo con mis proyectos y compañeros para lograr objetivos.</p>
-      <p><strong>Habilidades blandas:</strong> Trabajo en equipo, comunicación, resiliencia</p>
-      <p><strong>Habilidades técnicas:</strong> Comenzando, en proceso de aprendizaje</p>
-      <p><strong>Valores:</strong> Persistencia y resiliencia</p>
-    </div>
-  </div>
+      <article class="card glass">
+        <h2>Objetivos</h2>
+        <ol>
+          <li><strong>Corto plazo:</strong> ganar experiencia en una empresa tecnológica.</li>
+          <li><strong>Medio plazo:</strong> especializarme en desarrollo web y seguridad.</li>
+          <li><strong>Largo plazo:</strong> crear mi propio proyecto digital.</li>
+        </ol>
+      </article>
+    </section>
 
-  <div class="card">
-    <div class="card-header">Intereses y Motivaciones</div>
-    <div class="card-body">
-      <p><strong>Áreas de interés:</strong> Aplicaciones web, multiplataforma, ciberseguridad, tecnología en general</p>
-      <p><strong>Tareas que disfruto:</strong> Redes, aplicaciones web, ofimática</p>
-      <p><strong>Entorno preferido:</strong> Aún por definir</p>
-    </div>
-  </div>
+    <footer class="glass footer">
+      <p>Diseño inspirado en un bosque nocturno con efecto de cristal líquido.</p>
+      <button id="themeToggle" type="button">Cambiar atmósfera</button>
+    </footer>
+  </main>
 
-  <div class="card">
-    <div class="card-header">Fortalezas y Áreas de Mejora</div>
-    <div class="card-body">
-      <p><strong>Fortalezas:</strong> Resolver problemas</p>
-      <p><strong>Áreas de mejora:</strong> Concentración</p>
-      <div class="progress-bar">
-        <span>Trabajo en equipo</span>
-        <div class="bar"><div data-width="80%"></div></div>
-        <span>Resolución de problemas</span>
-        <div class="bar"><div data-width="70%"></div></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-header">Objetivos Profesionales</div>
-    <div class="card-body">
-      <canvas id="objetivosChart" width="200" height="200"></canvas>
-      <p><strong>Corto plazo (1-2 años):</strong> Entrar a una corporativa media o grande (ej. PC Componentes)</p>
-      <p><strong>Medio plazo (3-5 años):</strong> Conseguir un trabajo telemático</p>
-      <p><strong>Largo plazo (5+ años):</strong> Crear mi propia empresa</p>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-header">Plan de Acción</div>
-    <div class="card-body">
-      <p>Probar distintas áreas para descubrir qué me apasiona.</p>
-      <p>Seguir formándome y acceder a la universidad para especializarme más.</p>
-    </div>
-  </div>
-
-</div>
-
-<button id="theme-btn" aria-label="Cambiar tema">🎨</button>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
