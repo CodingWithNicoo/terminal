@@ -1,42 +1,58 @@
 /* Base */
 body {
   margin: 0;
-  background: #04070c;
   font-family: "Inter", sans-serif;
   color: white;
   overflow-x: hidden;
-  height: 200vh; /* allow scroll for testing parallax */
+  height: 200vh; /* para probar scroll y parallax */
 }
 
-/* Environment */
+/* Capas ambientales */
 .environment {
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
   z-index: -2;
   overflow: hidden;
 }
 .sky {
   position: absolute;
-  width: 100%; height: 100%;
-  background: radial-gradient(circle at 70% 20%, rgba(100,140,200,0.15), transparent 60%);
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 70% 20%, rgba(100,140,200,0.15), #04070c 80%);
 }
 .fog {
   position: absolute;
-  width: 200%; height: 100%;
+  width: 200%;
+  height: 100%;
   background: linear-gradient(to bottom, rgba(20,40,45,0.3), rgba(0,0,0,0.8));
   animation: fogMove 60s linear infinite;
 }
-@keyframes fogMove { 0%{transform:translateX(0)} 100%{transform:translateX(-25%)} }
+@keyframes fogMove {0%{transform:translateX(0)} 100%{transform:translateX(-25%)}}
 .forest {
   position: absolute;
-  bottom: 0;
-  width: 100%; height: 70%;
-  background: url("forest-silhouette.png") bottom center/cover no-repeat;
-  opacity: 0.7;
+  bottom:0;
+  width:100%;
+  height:70%;
+  background: url("assets/forest-silhouette.png") bottom center/cover no-repeat;
+  opacity:0.8;
+  transition: transform 0.1s;
 }
 
-/* Glass */
+/* Canvas de lluvia */
+#rain {
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  z-index:-1;
+}
+
+/* Panel de cristal (glass) */
 .glass {
   position: relative;
   max-width: 900px;
@@ -51,16 +67,25 @@ body {
   text-align: center;
 }
 
-/* CTA button */
+/* Botón */
 .cta {
   padding: 16px 36px;
   background: rgba(255,255,255,0.12);
   border: 1px solid rgba(255,255,255,0.3);
   border-radius: 40px;
-  color: white;
-  cursor: pointer;
+  color:white;
+  cursor:pointer;
   backdrop-filter: blur(10px);
   box-shadow: 0 0 20px rgba(100,200,255,0.4);
-  transition: 0.3s;
+  transition: all 0.3s;
 }
-.cta:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(100,200,255,0.8); }
+.cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(100,200,255,0.8);
+}
+
+/* Responsive */
+@media(max-width:768px){
+  .glass { margin: 80px 20px; padding: 40px; }
+  h1 { font-size: 40px; }
+}
