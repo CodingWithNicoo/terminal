@@ -1,78 +1,65 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>IPOP | Bosque Digital</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ForestChain IPOP</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <canvas id="forestMist" aria-hidden="true"></canvas>
-  <div id="plantLayer" aria-hidden="true"></div>
 
-  <main class="layout">
-    <header class="hero glass">
-      <p class="chip">IPOP • Perfil Profesional</p>
-      <h1>Portal IPOP con estética de bosque y liquid glass</h1>
-      <p>
-        Una presentación visual en negro y verde para transmitir calma, enfoque
-        y crecimiento profesional.
-        Una presentación visual con tonos oscuros y verdosos para transmitir calma,
-        enfoque y crecimiento profesional.
-      </p>
-    </header>
+<div class="environment">
+  <div class="sky"></div>
+  <div class="fog"></div>
+  <div class="forest"></div>
+</div>
 
-    <section class="grid" aria-label="Resumen IPOP">
-      <article class="card glass">
-        <h2>Datos Personales</h2>
-        <ul>
-          <li><strong>Nombre:</strong> Nicolás Miguel Malaguti Frias</li>
-          <li><strong>Edad:</strong> 16 años</li>
-          <li><strong>Formación:</strong> 1º de Grado Medio</li>
-          <li><strong>Centro:</strong> IES Eugeni d'Ors</li>
-        </ul>
-      </article>
+<div class="rain-container">
+  <canvas id="rain"></canvas>
+</div>
 
-      <article class="card glass">
-        <h2>Perfil Profesional</h2>
-        <p>
-          Me adapto rápido, trabajo bien en equipo y mantengo constancia para alcanzar objetivos.
-        </p>
-        <div class="tags">
-          <span>Resiliencia</span>
-          <span>Comunicación</span>
-          <span>Aprendizaje continuo</span>
-        </div>
-      </article>
+<main>
+<section class="hero glass">
+  <h1>ForestChain IPOP</h1>
+  <p>Invest in the future growing beneath the canopy.</p>
+  <button class="cta">Join Early Access</button>
+</section>
 
-      <article class="card glass">
-        <h2>Intereses</h2>
-        <p>Aplicaciones web, ciberseguridad, redes y tecnología en general.</p>
-        <div class="meter">
-          <label for="focus">Enfoque actual</label>
-          <div class="bar"><div id="focus" style="--value: 78%"></div></div>
-        </div>
-      </article>
+<section class="glass">
+  <h2>IPOP Overview</h2>
+  <p>ForestChain introduces sustainable blockchain infrastructure built for ecological resilience.</p>
+</section>
 
-      <article class="card glass">
-        <h2>Objetivos</h2>
-        <ol>
-          <li><strong>Corto plazo:</strong> ganar experiencia en una empresa tecnológica.</li>
-          <li><strong>Medio plazo:</strong> especializarme en desarrollo web y seguridad.</li>
-          <li><strong>Largo plazo:</strong> crear mi propio proyecto digital.</li>
-        </ol>
-      </article>
-    </section>
+<section class="glass stats">
+  <div class="stat">
+    <h3>$45M</h3>
+    <p>Projected Raise</p>
+  </div>
+  <div class="stat">
+    <h3>22%</h3>
+    <p>Projected Growth</p>
+  </div>
+  <div class="stat">
+    <h3>3.5M</h3>
+    <p>Tokens Issued</p>
+  </div>
+</section>
 
-    <footer class="glass footer">
-      <p>Diseño inspirado en un bosque nocturno con efecto de cristal líquido.</p>
-      <button id="themeToggle" type="button">Cambiar atmósfera</button>
-    </footer>
-  </main>
+<section class="glass">
+  <h2>Why Invest</h2>
+  <ul>
+    <li>Nature-backed infrastructure</li>
+    <li>Carbon-neutral architecture</li>
+    <li>Scalable token ecosystem</li>
+  </ul>
+</section>
 
-  <script src="script.js"></script>
+<section class="glass cta-section">
+  <h2>Enter The Forest</h2>
+  <button class="cta">Reserve Allocation</button>
+</section>
+</main>
+
+<script src="js/rain.js"></script>
 </body>
 </html>
