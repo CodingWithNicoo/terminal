@@ -1,46 +1,64 @@
 const canvas = document.getElementById("rain");
 const ctx = canvas.getContext("2d");
 
-function resizeCanvas() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
-window.addEventListener("resize", resizeCanvas);
-resizeCanvas();
+let width = window.innerWidth;
+let height = window.innerHeight;
+canvas.width = width;
+canvas.height = height;
 
-let rainDrops = [];
-let rainCount = window.innerWidth < 768 ? 200 : 500;
-
-for (let i = 0; i < rainCount; i++) {
-  rainDrops.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    length: Math.random() * 20,
-    speed: Math.random() * 6 + 4,
-    opacity: Math.random()
-  });
-}
-
-function drawRain() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.strokeStyle = "rgba(180,220,255,0.5)";
-  ctx.lineWidth = 1;
-  rainDrops.forEach(drop => {
-    ctx.globalAlpha = drop.opacity;
+class Raindrop {
+  constructor(layer){
+    this.layer = layer; // 1=fondo, 2=medio, 3=frente
+    this.reset();
+  }
+  reset(){
+    this.x = Math.random()*width;
+    this.y = Math.random()*height;
+    this.length = this.layer * (4 + Math.random()*6);
+    this.speed = this.layer * (2 + Math.random()*3);
+    this.opacity = 0.1 + Math.random()*0.3;
+  }
+  fall(){
+    this.y += this.speed;
+    if(this.y>height) this.reset();
+  }
+  draw(){
     ctx.beginPath();
-    ctx.moveTo(drop.x, drop.y);
-    ctx.lineTo(drop.x, drop.y + drop.length);
+    ctx.strokeStyle = `rgba(180,220,255,${this.opacity})`;
+    ctx.moveTo(this.x,this.y);
+    ctx.lineTo(this.x,this.y+this.length);
+    ctx.lineWidth = this.layer;
     ctx.stroke();
-    drop.y += drop.speed;
-    if (drop.y > canvas.height) drop.y = -20;
-  });
-  requestAnimationFrame(drawRain);
+  }
 }
-drawRain();
 
-/* Parallax scroll */
+// Crear gotas
+let rainDrops = [];
+for(let i=0;i<200;i++) rainDrops.push(new Raindrop(1));
+for(let i=0;i<150;i++) rainDrops.push(new Raindrop(2));
+for(let i=0;i<100;i++) rainDrops.push(new Raindrop(3));
+
+function animateRain(){
+  ctx.clearRect(0,0,width,height);
+  rainDrops.forEach(drop => {
+    drop.fall();
+    drop.draw();
+  });
+  requestAnimationFrame(animateRain);
+}
+animateRain();
+
+// Parallax de bosque y niebla
 window.addEventListener("scroll", () => {
   const scroll = window.scrollY;
-  document.querySelector(".forest").style.transform = `translateY(${scroll * 0.1}px)`;
-  document.querySelector(".fog").style.transform = `translateY(${scroll * 0.05}px)`;
+  document.querySelector(".forest").style.transform = `translateY(${scroll*0.1}px)`;
+  document.querySelector(".fog").style.transform = `translateY(${scroll*0.05}px)`;
+});
+
+// Ajustar tamaño
+window.addEventListener("resize", () => {
+  width = window.innerWidth;
+  height = window.innerHeight;
+  canvas.width = width;
+  canvas.height = height;
 });
