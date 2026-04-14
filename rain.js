@@ -8,20 +8,26 @@ canvas.height = height;
 
 class Raindrop {
   constructor(layer){
-    this.layer = layer; // 1=fondo, 2=medio, 3=frente
+    this.layer = layer;
     this.reset();
   }
+
   reset(){
     this.x = Math.random()*width;
     this.y = Math.random()*height;
-    this.length = this.layer * (4 + Math.random()*6);
-    this.speed = this.layer * (2 + Math.random()*3);
+    this.length = this.layer*(4 + Math.random()*6);
+    this.speed = this.layer*(2 + Math.random()*3);
     this.opacity = 0.1 + Math.random()*0.3;
   }
+
   fall(){
     this.y += this.speed;
-    if(this.y>height) this.reset();
+    if(this.y > height){
+      this.y = -10;
+      this.x = Math.random() * width;
+    }
   }
+
   draw(){
     ctx.beginPath();
     ctx.strokeStyle = `rgba(180,220,255,${this.opacity})`;
@@ -48,14 +54,21 @@ function animateRain(){
 }
 animateRain();
 
-// Parallax de bosque y niebla
+// Parallax
 window.addEventListener("scroll", () => {
   const scroll = window.scrollY;
-  document.querySelector(".forest").style.transform = `translateY(${scroll*0.1}px)`;
-  document.querySelector(".fog").style.transform = `translateY(${scroll*0.05}px)`;
+
+  document.querySelector(".layer1").style.transform =
+    `translateY(${scroll*0.05}px) scale(1.02)`;
+
+  document.querySelector(".layer2").style.transform =
+    `translateY(${scroll*0.08}px) scale(1.05)`;
+
+  document.querySelector(".layer3").style.transform =
+    `translateY(${scroll*0.12}px) scale(1.08)`;
 });
 
-// Ajustar tamaño
+// Resize
 window.addEventListener("resize", () => {
   width = window.innerWidth;
   height = window.innerHeight;
