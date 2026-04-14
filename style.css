@@ -4,88 +4,96 @@ body {
   font-family: "Inter", sans-serif;
   color: white;
   overflow-x: hidden;
-  height: 200vh; /* para probar scroll y parallax */
+  height: 200vh;
+  background: #04070c;
 }
 
-/* Capas ambientales */
+/* Entorno */
 .environment {
   position: fixed;
-  top:0;
-  left:0;
-  width: 100%;
-  height: 100%;
-  z-index: -2;
-  overflow: hidden;
+  top:0; left:0;
+  width:100%; height:100%;
+  z-index:-3;
+  overflow:hidden;
 }
+
 .sky {
-  position: absolute;
-  width: 100%;
-  height: 100%;
+  position:absolute;
+  width:100%; height:100%;
   background: radial-gradient(circle at 70% 20%, rgba(100,140,200,0.15), #04070c 80%);
 }
+
 .fog {
-  position: absolute;
-  width: 200%;
-  height: 100%;
+  position:absolute;
+  width:200%; height:100%;
   background: linear-gradient(to bottom, rgba(20,40,45,0.3), rgba(0,0,0,0.8));
   animation: fogMove 60s linear infinite;
 }
-@keyframes fogMove {0%{transform:translateX(0)} 100%{transform:translateX(-25%)}}
+
+@keyframes fogMove {
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-25%)}
+}
+
+/* Bosque */
 .forest {
-  position: absolute;
+  position:absolute;
   bottom:0;
   width:100%;
   height:70%;
-  background: url("assets/forest-silhouette.png") bottom center/cover no-repeat;
-  opacity:0.8;
-  transition: transform 0.1s;
+  opacity:0.9;
+  will-change: transform;
 }
 
-/* Canvas de lluvia */
-#rain {
-  position: fixed;
-  top:0;
-  left:0;
+.forest svg {
   width:100%;
   height:100%;
+  display:block;
+}
+
+/* Lluvia */
+#rain {
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
   pointer-events:none;
   z-index:-1;
 }
 
-/* Panel de cristal (glass) */
+/* Glass panel */
 .glass {
-  position: relative;
-  max-width: 900px;
-  margin: 120px auto;
-  padding: 60px;
+  position:relative;
+  max-width:900px;
+  margin:120px auto;
+  padding:60px;
   background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border-radius: 20px;
-  border: 1px solid rgba(255,255,255,0.15);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-  text-align: center;
+  backdrop-filter: blur(20px);
+  border-radius:20px;
+  border:1px solid rgba(255,255,255,0.15);
+  box-shadow:0 20px 60px rgba(0,0,0,0.6);
+  text-align:center;
 }
 
 /* Botón */
 .cta {
-  padding: 16px 36px;
+  padding:16px 36px;
   background: rgba(255,255,255,0.12);
-  border: 1px solid rgba(255,255,255,0.3);
-  border-radius: 40px;
+  border:1px solid rgba(255,255,255,0.3);
+  border-radius:40px;
   color:white;
   cursor:pointer;
   backdrop-filter: blur(10px);
-  box-shadow: 0 0 20px rgba(100,200,255,0.4);
+  box-shadow:0 0 20px rgba(100,200,255,0.4);
   transition: all 0.3s;
 }
+
 .cta:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 30px rgba(100,200,255,0.8);
+  box-shadow:0 0 30px rgba(100,200,255,0.8);
 }
 
 /* Responsive */
 @media(max-width:768px){
-  .glass { margin: 80px 20px; padding: 40px; }
-  h1 { font-size: 40px; }
+  .glass { margin:80px 20px; padding:40px; }
+  h1 { font-size:40px; }
 }
