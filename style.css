@@ -1,102 +1,104 @@
 body {
   margin: 0;
-  font-family: Inter, sans-serif;
+  font-family: Arial, sans-serif;
   color: white;
+  background: #05080c;
   overflow-x: hidden;
-  height: 200vh;
-  background: #04070c;
-}
-
-/* FLASH */
-.flash {
-  position: fixed;
-  inset: 0;
-  background: white;
-  opacity: 0;
-  pointer-events: none;
-  z-index: 999;
-  transition: opacity .1s;
 }
 
 /* ESCENA */
-.environment {
+.scene {
   position: fixed;
   inset: 0;
   z-index: -3;
-  overflow: hidden;
 }
 
+/* CIELO */
 .sky {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 70% 20%, rgba(100,140,200,0.15), #04070c 80%);
+  background: radial-gradient(circle at 50% 20%, rgba(120,160,255,0.15), #05080c 70%);
 }
 
+/* NIEBLA */
 .fog {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(20,40,45,0.3), rgba(0,0,0,0.8));
-  animation: fog 50s linear infinite;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.05), rgba(0,0,0,0.7));
+  animation: fogMove 40s linear infinite;
 }
 
-@keyframes fog {
+@keyframes fogMove {
   from { transform: translateX(0); }
   to { transform: translateX(-20%); }
 }
 
-/* BOSQUE */
+/* BOSQUE BASE */
 .forest {
   position: absolute;
   bottom: 0;
   width: 100%;
   height: 70%;
-  transform-origin: bottom center;
-  will-change: transform;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
 }
 
-.forest svg {
-  width: 100%;
-  height: 100%;
+/* ÁRBOLES (dibujados con CSS simple) */
+.tree {
+  width: 20px;
+  height: 120px;
+  background: linear-gradient(#1c3f2f, #0a1a14);
+  border-radius: 10px;
+  position: relative;
 }
 
-/* PROFUNDIDAD REAL */
-.layer1 { opacity: .55; filter: blur(1.2px); transform: scale(1.05); }
-.layer2 { opacity: .75; filter: blur(.5px); transform: scale(1.1); }
-.layer3 { opacity: 1; filter: blur(0); transform: scale(1.2); }
+.tree::before {
+  content: "";
+  position: absolute;
+  bottom: 80px;
+  left: -25px;
+  width: 70px;
+  height: 70px;
+  background: #1a4b35;
+  border-radius: 50%;
+}
 
-/* LLUVIA */
+/* CAPAS */
+.back .tree {
+  transform: scale(0.6);
+  opacity: 0.4;
+}
+
+.mid .tree {
+  transform: scale(0.85);
+  opacity: 0.7;
+}
+
+.front .tree {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+/* CONTENIDO */
+.content {
+  position: relative;
+  text-align: center;
+  padding-top: 20vh;
+}
+
+button {
+  padding: 14px 28px;
+  border-radius: 30px;
+  border: none;
+  background: rgba(255,255,255,0.15);
+  color: white;
+  cursor: pointer;
+}
+
+/* CANVAS LLUVIA */
 #rain {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: -1;
-}
-
-/* GLASS */
-.glass {
-  position: relative;
-  max-width: 900px;
-  margin: 120px auto;
-  padding: 60px;
-  text-align: center;
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(22px);
-  border-radius: 20px;
-  border: 1px solid rgba(255,255,255,0.15);
-}
-
-/* BOTÓN */
-.cta {
-  padding: 16px 36px;
-  border-radius: 40px;
-  border: 1px solid rgba(255,255,255,0.3);
-  background: rgba(255,255,255,0.12);
-  color: white;
-  cursor: pointer;
-  transition: .3s;
-}
-
-.cta:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 25px rgba(100,200,255,.6);
 }
