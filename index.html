@@ -3,66 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ForestChain IPOP</title>
+  <title>ForestChain</title>
 
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="flash"></div>
+<div class="scene">
 
-<div class="environment">
   <div class="sky"></div>
   <div class="fog"></div>
 
-  <!-- 🌲 CAPA LEJANA -->
-  <div class="forest layer1">
-    <svg viewBox="0 0 800 300">
-      <polygon points="20,300 50,170 80,300" fill="#0b1c17"/>
-      <polygon points="120,300 150,160 180,300" fill="#0b1c17"/>
-      <polygon points="220,300 250,180 280,300" fill="#0b1c17"/>
-      <polygon points="320,300 350,150 380,300" fill="#0b1c17"/>
-      <polygon points="420,300 450,170 480,300" fill="#0b1c17"/>
-      <polygon points="520,300 550,160 580,300" fill="#0b1c17"/>
-      <polygon points="620,300 650,180 680,300" fill="#0b1c17"/>
-      <polygon points="720,300 750,160 780,300" fill="#0b1c17"/>
-    </svg>
-  </div>
+  <!-- BOSQUE -->
+  <div class="forest layer back"></div>
+  <div class="forest layer mid"></div>
+  <div class="forest layer front"></div>
 
-  <!-- 🌲 CAPA MEDIA -->
-  <div class="forest layer2">
-    <svg viewBox="0 0 800 300">
-      <polygon points="40,300 75,180 110,300" fill="#12322b"/>
-      <polygon points="160,300 195,150 230,300" fill="#12322b"/>
-      <polygon points="280,300 315,170 350,300" fill="#12322b"/>
-      <polygon points="400,300 435,140 470,300" fill="#12322b"/>
-      <polygon points="520,300 555,180 590,300" fill="#12322b"/>
-      <polygon points="640,300 675,150 710,300" fill="#12322b"/>
-    </svg>
-  </div>
-
-  <!-- 🌲 CAPA CERCANA -->
-  <div class="forest layer3">
-    <svg viewBox="0 0 800 300">
-      <polygon points="80,300 120,160 160,300" fill="#1a4b35"/>
-      <polygon points="220,300 260,140 300,300" fill="#1a4b35"/>
-      <polygon points="360,300 400,170 440,300" fill="#1a4b35"/>
-      <polygon points="500,300 540,130 580,300" fill="#1a4b35"/>
-      <polygon points="640,300 680,160 720,300" fill="#1a4b35"/>
-    </svg>
-  </div>
 </div>
 
 <canvas id="rain"></canvas>
 
-<main>
-  <section class="glass">
-    <h1>ForestChain IPOP</h1>
-    <p>Invierte en el futuro bajo el bosque lluvioso.</p>
-    <button class="cta">Unirse al Acceso Temprano</button>
-  </section>
-</main>
+<div class="content">
+  <h1>ForestChain</h1>
+  <p>Invierte en el futuro bajo la naturaleza.</p>
+  <button>Acceso temprano</button>
+</div>
 
 <script src="rain.js"></script>
 
