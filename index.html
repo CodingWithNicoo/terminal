@@ -1,231 +1,58 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ForestChain IPOP</title>
-<style>
-  /* Base */
-  body {
-    margin: 0;
-    font-family: "Inter", sans-serif;
-    color: white;
-    overflow-x: hidden;
-    height: 200vh; /* para probar scroll y parallax */
-    background: #04070c;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ForestChain IPOP</title>
 
-  /* Capas ambientales */
-  .environment {
-    position: fixed;
-    top:0; left:0;
-    width: 100%; height: 100%;
-    z-index: -3;
-    overflow: hidden;
-  }
-  .sky {
-    position: absolute;
-    width: 100%; height: 100%;
-    background: radial-gradient(circle at 70% 20%, rgba(100,140,200,0.15), #04070c 80%);
-  }
-  .fog {
-    position: absolute;
-    width: 200%; height: 100%;
-    background: linear-gradient(to bottom, rgba(20,40,45,0.3), rgba(0,0,0,0.8));
-    animation: fogMove 60s linear infinite;
-  }
-  @keyframes fogMove {0%{transform:translateX(0)} 100%{transform:translateX(-25%)}}
-
-  /* Bosque con SVG */
-  .forest {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 70%;
-    z-index: -2;
-    opacity: 0.9;
-  }
-  .forest svg {
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-
-  /* Canvas de lluvia */
-  #rain {
-    position: fixed;
-    top:0; left:0;
-    width:100%;
-    height:100%;
-    pointer-events:none;
-    z-index:-1;
-  }
-
-  /* Panel de vidrio */
-  .glass {
-    position: relative;
-    max-width: 900px;
-    margin: 120px auto;
-    padding: 60px;
-    background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.15);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-    text-align: center;
-  }
-
-  /* Botón */
-  .cta {
-    padding: 16px 36px;
-    background: rgba(255,255,255,0.12);
-    border: 1px solid rgba(255,255,255,0.3);
-    border-radius: 40px;
-    color:white;
-    cursor:pointer;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 20px rgba(100,200,255,0.4);
-    transition: all 0.3s;
-  }
-  .cta:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 30px rgba(100,200,255,0.8);
-  }
-
-  /* Responsive */
-  @media(max-width:768px){
-    .glass { margin: 80px 20px; padding: 40px; }
-    h1 { font-size: 40px; }
-  }
-</style>
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<!-- Fondo -->
 <div class="environment">
   <div class="sky"></div>
   <div class="fog"></div>
 
-  <!-- Capa 1: lejana -->
-<div class="forest layer1">
-  <svg viewBox="0 0 800 300" preserveAspectRatio="xMidYMax meet">
-    <polygon points="0,300 50,120 100,300" fill="#0b1c17"/>
-    <polygon points="150,300 175,100 200,300" fill="#0b1c17"/>
-    <polygon points="250,300 275,130 300,300" fill="#0b1c17"/>
-    <polygon points="350,300 375,90 400,300" fill="#0b1c17"/>
-    <polygon points="450,300 475,150 500,300" fill="#0b1c17"/>
-    <polygon points="550,300 575,110 600,300" fill="#0b1c17"/>
-    <polygon points="650,300 675,140 700,300" fill="#0b1c17"/>
-    <polygon points="750,300 775,90 800,300" fill="#0b1c17"/>
-  </svg>
+  <!-- Bosque capas -->
+  <div class="forest layer1">
+    <svg viewBox="0 0 800 300">
+      <polygon points="0,300 50,120 100,300" fill="#0b1c17"/>
+      <polygon points="150,300 175,100 200,300" fill="#0b1c17"/>
+      <polygon points="300,300 325,110 350,300" fill="#0b1c17"/>
+    </svg>
+  </div>
+
+  <div class="forest layer2">
+    <svg viewBox="0 0 800 300">
+      <polygon points="50,300 80,150 110,300" fill="#12322b"/>
+      <polygon points="200,300 230,130 260,300" fill="#12322b"/>
+      <polygon points="400,300 430,150 460,300" fill="#12322b"/>
+    </svg>
+  </div>
+
+  <div class="forest layer3">
+    <svg viewBox="0 0 800 300">
+      <polygon points="100,300 130,170 160,300" fill="#1a4b35"/>
+      <polygon points="300,300 330,140 360,300" fill="#1a4b35"/>
+      <polygon points="500,300 530,160 560,300" fill="#1a4b35"/>
+    </svg>
+  </div>
 </div>
 
-<!-- Capa 2: media -->
-<div class="forest layer2">
-  <svg viewBox="0 0 800 300" preserveAspectRatio="xMidYMax meet">
-    <polygon points="25,300 60,160 95,300" fill="#12322b"/>
-    <polygon points="125,300 160,130 195,300" fill="#12322b"/>
-    <polygon points="225,300 260,150 295,300" fill="#12322b"/>
-    <polygon points="325,300 360,110 395,300" fill="#12322b"/>
-    <polygon points="425,300 460,170 495,300" fill="#12322b"/>
-    <polygon points="525,300 560,140 595,300" fill="#12322b"/>
-    <polygon points="625,300 660,160 695,300" fill="#12322b"/>
-    <polygon points="725,300 760,120 795,300" fill="#12322b"/>
-  </svg>
-</div>
-
-<!-- Capa 3: cercana -->
-<div class="forest layer3">
-  <svg viewBox="0 0 800 300" preserveAspectRatio="xMidYMax meet">
-    <polygon points="10,300 40,180 70,300" fill="#1a4b35"/>
-    <polygon points="110,300 140,150 170,300" fill="#1a4b35"/>
-    <polygon points="210,300 240,170 270,300" fill="#1a4b35"/>
-    <polygon points="310,300 340,140 370,300" fill="#1a4b35"/>
-    <polygon points="410,300 440,160 470,300" fill="#1a4b35"/>
-    <polygon points="510,300 540,150 570,300" fill="#1a4b35"/>
-    <polygon points="610,300 640,180 670,300" fill="#1a4b35"/>
-    <polygon points="710,300 740,160 770,300" fill="#1a4b35"/>
-  </svg>
-</div>
-
-<!-- Canvas de lluvia -->
 <canvas id="rain"></canvas>
 
-<!-- Panel de vidrio -->
 <main>
-  <section class="glass hero">
+  <section class="glass">
     <h1>ForestChain IPOP</h1>
     <p>Invierte en el futuro bajo el bosque lluvioso.</p>
     <button class="cta">Unirse al Acceso Temprano</button>
   </section>
 </main>
 
-<!-- Lluvia y parallax -->
-<script>
-const canvas = document.getElementById("rain");
-const ctx = canvas.getContext("2d");
-
-let width = window.innerWidth;
-let height = window.innerHeight;
-canvas.width = width;
-canvas.height = height;
-
-class Raindrop {
-  constructor(layer){
-    this.layer = layer;
-    this.reset();
-  }
-  reset(){
-    this.x = Math.random()*width;
-    this.y = Math.random()*height;
-    this.length = this.layer*(4 + Math.random()*6);
-    this.speed = this.layer*(2 + Math.random()*3);
-    this.opacity = 0.1 + Math.random()*0.3;
-  }
-  fall(){
-    this.y += this.speed;
-    if(this.y>height) this.reset();
-  }
-  draw(){
-    ctx.beginPath();
-    ctx.strokeStyle = `rgba(180,220,255,${this.opacity})`;
-    ctx.moveTo(this.x,this.y);
-    ctx.lineTo(this.x,this.y+this.length);
-    ctx.lineWidth = this.layer;
-    ctx.stroke();
-  }
-}
-
-// Crear gotas
-let rainDrops = [];
-for(let i=0;i<200;i++) rainDrops.push(new Raindrop(1));
-for(let i=0;i<150;i++) rainDrops.push(new Raindrop(2));
-for(let i=0;i<100;i++) rainDrops.push(new Raindrop(3));
-
-function animateRain(){
-  ctx.clearRect(0,0,width,height);
-  rainDrops.forEach(drop => { drop.fall(); drop.draw(); });
-  requestAnimationFrame(animateRain);
-}
-animateRain();
-
-// Parallax de capas del bosque
-window.addEventListener("scroll", () => {
-  const scroll = window.scrollY;
-  document.querySelector(".layer1").style.transform = `translateY(${scroll*0.05}px)`;
-  document.querySelector(".layer2").style.transform = `translateY(${scroll*0.08}px)`;
-  document.querySelector(".layer3").style.transform = `translateY(${scroll*0.12}px)`;
-});
-
-// Ajustar canvas al redimensionar
-window.addEventListener("resize", () => {
-  width = window.innerWidth;
-  height = window.innerHeight;
-  canvas.width = width;
-  canvas.height = height;
-});
-</script>
+<!-- JS -->
+<script src="rain.js"></script>
 
 </body>
 </html>
